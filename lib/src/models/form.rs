@@ -1,4 +1,3 @@
-use serde::{Deserialize, Deserializer};
 use std::fmt;
 
 use crate::serializable;
@@ -34,27 +33,17 @@ impl fmt::Display for FormKind {
 }
 
 serializable! {
+  #[serde(rename = "form")]
   pub struct Form {
     #[serde(rename = "@kind")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub kind: Option<FormKind>,
 
-    #[serde(rename = "$text")]
+    #[serde(rename = "@term")]
     pub term: EntryRef,
+
+    #[serde(default, rename = "tag")]
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub tags: Vec<String>,
   }
-}
-
-pub fn unwrap_forms<'de, D>(deserializer: D) -> Result<Vec<Form>, D::Error>
-where
-    D: Deserializer<'de>,
-{
-    #[derive(Deserialize)]
-    struct Forms {
-        #[serde(default)]
-        form: Vec<Form>,
-    }
-
-    let wrapper = Option::<Forms>::deserialize(deserializer)?;
-
-    Ok(wrapper.map(|forms| forms.form).unwrap_or_default())
 }
