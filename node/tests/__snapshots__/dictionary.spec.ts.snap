@@ -6,6 +6,7 @@ exports[`Dictionary > can index and search a dictionary 1`] = `
     "etymologies": [
       {
         "description": "Latin root",
+        "pronunciations": [],
         "senses": {
           "n": {
             "definitions": [
@@ -16,8 +17,10 @@ exports[`Dictionary > can index and search a dictionary 1`] = `
               "Migration (of fish).",
               "A group of fish that migrate, or ascend a river for the purpose of spawning.",
             ],
+            "forms": [],
             "pos": "n",
             "tags": [],
+            "translations": [],
           },
           "v": {
             "definitions": [
@@ -33,13 +36,14 @@ exports[`Dictionary > can index and search a dictionary 1`] = `
                 "description": "A number of verb senses",
               },
             ],
+            "forms": [],
             "pos": "v",
             "tags": [],
+            "translations": [],
           },
         },
       },
     ],
-    "forms": [],
     "term": "run",
   },
 ]
@@ -52,18 +56,20 @@ exports[`Dictionary > lookup > can split terms 1`] = `
       "etymologies": [
         {
           "description": "Latin root",
+          "pronunciations": [],
           "senses": {
             "n": {
               "definitions": [
                 "a cat",
               ],
+              "forms": [],
               "pos": "n",
               "tags": [],
+              "translations": [],
             },
           },
         },
       ],
-      "forms": [],
       "term": "cat",
     },
   },
@@ -72,19 +78,20 @@ exports[`Dictionary > lookup > can split terms 1`] = `
       "etymologies": [
         {
           "description": "Latin root",
-          "pronunciation": "dooooog",
+          "pronunciations": [],
           "senses": {
             "un": {
               "definitions": [
                 "a dog",
               ],
+              "forms": [],
               "pos": "un",
               "tags": [],
+              "translations": [],
             },
           },
         },
       ],
-      "forms": [],
       "term": "dog",
     },
   },
@@ -98,18 +105,20 @@ exports[`Dictionary > lookup > looks up terms properly 1`] = `
       "etymologies": [
         {
           "description": "Latin root",
+          "pronunciations": [],
           "senses": {
             "n": {
               "definitions": [
                 "a cat",
               ],
+              "forms": [],
               "pos": "n",
               "tags": [],
+              "translations": [],
             },
           },
         },
       ],
-      "forms": [],
       "term": "cat",
     },
   },
@@ -126,18 +135,20 @@ exports[`Dictionary > should tokenize text and find entries 1`] = `
           "etymologies": [
             {
               "description": "Latin root",
+              "pronunciations": [],
               "senses": {
                 "v": {
                   "definitions": [
                     "Lorem ipsum",
                   ],
+                  "forms": [],
                   "pos": "v",
                   "tags": [],
+                  "translations": [],
                 },
               },
             },
           ],
-          "forms": [],
           "term": "你",
         },
       },
@@ -146,18 +157,20 @@ exports[`Dictionary > should tokenize text and find entries 1`] = `
           "etymologies": [
             {
               "description": "Latin root",
+              "pronunciations": [],
               "senses": {
                 "v": {
                   "definitions": [
                     "Lorem ipsum",
                   ],
+                  "forms": [],
                   "pos": "v",
                   "tags": [],
+                  "translations": [],
                 },
               },
             },
           ],
-          "forms": [],
           "term": "好",
         },
       },
@@ -184,18 +197,20 @@ exports[`Dictionary > should tokenize text and find entries 1`] = `
           "etymologies": [
             {
               "description": "Latin root",
+              "pronunciations": [],
               "senses": {
                 "v": {
                   "definitions": [
                     "Lorem ipsum",
                   ],
+                  "forms": [],
                   "pos": "v",
                   "tags": [],
+                  "translations": [],
                 },
               },
             },
           ],
-          "forms": [],
           "term": "你",
         },
       },

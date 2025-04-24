@@ -37,18 +37,19 @@ export interface Entry {
   term: string;
   seeAlso?: string;
   etymologies: Array<Etymology>;
-  forms: Array<Form>;
 }
 
 export interface Etymology {
   id?: string;
-  pronunciation?: string;
+  pronunciations: Array<Pronunciation>;
   description?: string;
   senses: Record<string, Sense>;
 }
 
 export interface Example {
   value: string;
+  translations: Array<Translation>;
+  pronunciations: Array<Pronunciation>;
 }
 
 export interface Form {
@@ -90,10 +91,35 @@ export interface LookupResult {
   directedFrom?: Entry;
 }
 
+export interface MediaUrl {
+  src: string;
+  mimeType?: string;
+  description?: string;
+}
+
 export interface Note {
   id?: string;
   value: string;
   examples: Array<Example>;
+}
+
+export interface Pronunciation {
+  kind: PronunciationKind;
+  value: string;
+  urls: Array<MediaUrl>;
+}
+
+export declare const enum PronunciationKind {
+  IPA = 0,
+  Pinyin = 1,
+  Hiragana = 2,
+  Romaji = 3,
+  Katakana = 4,
+  Yale = 5,
+  Jyutping = 6,
+  Bopomofo = 7,
+  Hepburn = 8,
+  Other = 9,
 }
 
 export interface SearchOptions {
@@ -108,6 +134,8 @@ export interface Sense {
   lemma?: string;
   definitions: Array<Definition | Group>;
   tags: Array<string>;
+  translations: Array<Translation>;
+  forms: Array<Form>;
 }
 
 export interface SplitOptions {
@@ -128,4 +156,9 @@ export interface TokenizeOptions {
   follow?: boolean;
   allowList?: Array<string>;
   insensitive?: boolean;
+}
+
+export interface Translation {
+  lang: string;
+  value: string;
 }

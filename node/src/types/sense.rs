@@ -1,6 +1,8 @@
 use napi::bindgen_prelude::*;
 
-use super::{definition::Definition, group::Group};
+use odict::DefinitionType;
+
+use super::{definition::Definition, form::Form, group::Group, translation::Translation};
 
 #[napi(object)]
 pub struct Sense {
@@ -8,30 +10,26 @@ pub struct Sense {
   pub lemma: Option<String>,
   pub definitions: Vec<Either<Definition, Group>>,
   pub tags: Vec<String>,
+  pub translations: Vec<Translation>,
+  pub forms: Vec<Form>,
 }
 
-impl Sense {
-  pub fn from(sense: odict::Sense) -> Result<Self> {
-    let odict::Sense {
-      pos,
-      lemma,
-      definitions,
-      tags,
-    } = sense;
-
-    Ok(Self {
-      pos: pos.to_string(),
-      lemma: lemma.map(|l| l.0),
-      definitions: definitions
+impl From<odict::Sense> for Sense {
+  fn from(sense: odict::Sense) -> Self {
+    Sense {
+      pos: sense.pos.to_string(),
+      lemma: sense.lemma.map(|entry_ref| entry_ref.to_string()),
+      definitions: sense
+        .definitions
         .into_iter()
-        .map(|d| -> Result<Either<Definition, Group>> {
-          match d {
-            odict::DefinitionType::Definition(d) => Ok(Either::A(Definition::from(d)?)),
-            odict::DefinitionType::Group(g) => Ok(Either::B(Group::from(g)?)),
-          }
+        .map(|def_type| match def_type {
+          DefinitionType::Definition(def) => Either::A(def.into()),
+          DefinitionType::Group(group) => Either::B(group.into()),
         })
-        .collect::<Result<Vec<Either<Definition, Group>>, _>>()?,
-      tags,
-    })
+        .collect(),
+      tags: sense.tags,
+      translations: sense.translations.into_iter().map(|t| t.into()).collect(),
+      forms: sense.forms.into_iter().map(|f| f.into()).collect(),
+    }
   }
 }

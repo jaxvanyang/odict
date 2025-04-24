@@ -7,10 +7,14 @@ mod example;
 mod form;
 mod group;
 mod id;
+mod media_url;
 mod note;
 #[allow(non_camel_case_types)]
 mod pos;
+mod pronunciation;
+mod pronunciation_kind;
 mod sense;
+mod translation;
 
 #[macro_use]
 mod serializable;
@@ -24,6 +28,10 @@ pub use self::example::*;
 pub use self::form::*;
 pub use self::group::*;
 pub use self::id::*;
+pub use self::media_url::*;
 pub use self::note::*;
 pub use self::pos::*;
+pub use self::pronunciation::*;
+pub use self::pronunciation_kind::*;
 pub use self::sense::*;
+pub use self::translation::*;

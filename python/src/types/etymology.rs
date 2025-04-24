@@ -1,16 +1,19 @@
 use std::{collections::HashMap, fmt};
 
 use pyo3::prelude::*;
+use structural_convert::StructuralConvert;
 
+use super::pronunciation::Pronunciation;
 use super::sense::Sense;
 
 #[pyclass]
-#[derive(Clone)]
+#[derive(Clone, StructuralConvert)]
+#[convert(from(odict::Etymology))]
 pub struct Etymology {
     #[pyo3(get)]
     pub id: Option<String>,
     #[pyo3(get)]
-    pub pronunciation: Option<String>,
+    pub pronunciations: Vec<Pronunciation>,
     #[pyo3(get)]
     pub description: Option<String>,
     #[pyo3(get)]
@@ -26,30 +29,9 @@ impl fmt::Debug for Etymology {
 
         f.debug_struct("Etymology")
             .field("id", &self.id)
-            .field("pronunciation", &self.pronunciation)
+            .field("pronunciations", &self.pronunciations)
             .field("description", &self.description)
             .field("senses", &senses)
             .finish()
-    }
-}
-
-impl From<odict::Etymology> for Etymology {
-    fn from(etymology: odict::Etymology) -> Self {
-        let odict::Etymology {
-            id,
-            pronunciation,
-            description,
-            senses,
-        } = etymology;
-
-        Self {
-            id,
-            pronunciation,
-            description: description.map(|d| String::from(d)),
-            senses: senses
-                .into_iter()
-                .map(|(k, v)| (k.to_string(), Sense::from(v)))
-                .collect(),
-        }
     }
 }

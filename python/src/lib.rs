@@ -1,6 +1,6 @@
 use dictionary::Dictionary;
 use pyo3::prelude::*;
-use types::FormKind;
+use types::{FormKind, MediaURL, Pronunciation, PronunciationKind};
 
 mod dictionary;
 mod types;
@@ -11,5 +11,8 @@ fn theopendictionary(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add("POS_TAGS", odict::POS_TAGS)?;
     m.add_class::<Dictionary>()?;
     m.add_class::<FormKind>()?;
+    m.add_class::<PronunciationKind>()?;
+    m.add_class::<MediaURL>()?;
+    m.add_class::<Pronunciation>()?;
     Ok(())
 }

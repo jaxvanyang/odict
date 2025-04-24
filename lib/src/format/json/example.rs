@@ -1,24 +1,13 @@
 use serde::Serialize;
+use structural_convert::StructuralConvert;
 
+use super::TranslationJSON;
 use crate::Example;
 
-#[derive(Serialize, Clone)]
+#[derive(Serialize, Clone, StructuralConvert)]
+#[convert(from(Example))]
 pub struct ExampleJSON {
     pub value: String,
-}
-
-impl From<Example> for ExampleJSON {
-    fn from(example: Example) -> Self {
-        Self {
-            value: example.value,
-        }
-    }
-}
-
-impl From<&Example> for ExampleJSON {
-    fn from(example: &Example) -> Self {
-        Self {
-            value: example.value.clone(),
-        }
-    }
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub translations: Vec<TranslationJSON>,
 }
